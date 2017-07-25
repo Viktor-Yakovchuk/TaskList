@@ -1,0 +1,8 @@
+[
+  {"name":"id","title":"ID","type":"number","style":{"width":80,"maxWidth":80}},
+  {"name":"username","title":"Username"},
+  {"name":"email","title":"E-mail"},
+  {"name":"text","title":"Text"},
+  {"name":"status","title":"Status", "formatter": "statusFormatter"},
+  {"name":"id","title":"Picture", "formatter": "pictureFormatter"}
+] 

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!--<link rel="icon" href="../../favicon.ico">-->
+
+	<title>TaskList</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- FooTable Bootstrap CSS -->
+	<link href="css/footable.bootstrap.min.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body class="docs">
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="#" class="navbar-brand">Tasklist</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<!--<li><a href="../../getting-started.html">Getting started</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Components <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="../../components/editing.html">Editing</a></li>
+						<li><a href="../../components/filtering.html">Filtering</a></li>
+						<li><a href="../../components/paging.html">Paging</a></li>
+						<li><a href="../../components/sorting.html">Sorting</a></li>
+						<li><a href="../../components/state.html">State</a></li>
+					</ul>
+				</li>-->
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#" id="auth-link">Authorize</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+<!-- Header -->
+
+<!-- Content -->
+<div class="container">
+	<div>
+		<div class="example">
+			<table id="editing-example" class="table" data-paging="true" data-filtering="true" data-sorting="true"></table>
+
+			<!-- Add Task Modal -->
+			<div class="modal fade" id="editor-modal" tabindex="-1" role="dialog" aria-labelledby="editor-title">
+				<style scoped>
+					/* provides a red astrix to denote required fields */
+					.form-group.required .control-label:after {
+						content:"*";
+						color:red;
+						margin-left: 4px;
+					}
+				</style>
+				<div class="modal-dialog" role="document">
+					<form class="modal-content form-horizontal" id="editor">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="editor-title">Add Task</h4>
+						</div>
+						<div class="modal-body">
+							<input type="number" id="id" name="id" class="hidden"/>
+							<div class="form-group required">
+								<label for="username" class="col-sm-3 control-label">Username</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+								</div>
+							</div>
+							<div class="form-group required">
+								<label for="email" class="col-sm-3 control-label">E-mail</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="email" name="email" placeholder="E-mail" required>
+								</div>
+							</div>
+							<div class="form-group required">
+								<label for="text" class="col-sm-3 control-label">Text</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="text" name="text" placeholder="Text" required>
+								</div>
+							</div>
+                            <div class="form-group required">
+								<label for="text" class="col-sm-3 control-label">Picture</label>
+								<div class="col-sm-9">
+									<input type="file" class="form-control" id="picture" name="picture" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="status" class="col-sm-3 control-label">Status</label>
+								<div class="col-sm-9">
+									<input type="checkbox" class="form-control" id="status" name="status" placeholder="Status">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Preview</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+            <!-- Auth Modal -->
+			<div class="modal fade" id="auth-modal" tabindex="-1" role="dialog" aria-labelledby="auth-title">
+				<style scoped>
+					/* provides a red astrix to denote required fields */
+					.form-group.required .control-label:after {
+						content:"*";
+						color:red;
+						margin-left: 4px;
+					}
+				</style>
+				<div class="modal-dialog" role="document">
+					<form class="modal-content form-horizontal" id="auth">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="auth-title">Auth form</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group required">
+								<label for="login" class="col-sm-3 control-label">Login</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="login" name="login" placeholder="Login" required>
+								</div>
+							</div>
+							<div class="form-group required">
+								<label for="password" class="col-sm-3 control-label">Password</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Authorize</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div> <!-- /container -->
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Add in any FooTable dependencies we may need -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<!-- Add in FooTable itself -->
+<script src="js/footable.js"></script>
+<!-- Initialize FooTable -->
+<script src="js/main.js"></script>
+</body>
+</html>
